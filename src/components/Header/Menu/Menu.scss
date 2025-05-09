@@ -1,0 +1,54 @@
+@import "../../../SCSS/index.scss";
+
+.menu {
+  background-color: $background-grey-dark;
+  border-radius: 0;
+
+  .ui.grid {
+    margin: 0;
+  }
+
+  &__right {
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+
+    .ui.menu {
+      border: 0;
+      box-shadow: none;
+      height: 100%;
+      background: transparent;
+
+      .icon {
+        margin-right: 10px !important;
+        color: $primary;
+      }
+
+      .item {
+        color: $font-light !important;
+        border-radius: 0 !important;
+        height: 100%;
+
+        &:hover {
+          color: $font-light;
+          background-color: $background-dark-absolute;
+          &:before {
+            background-color: $background-dark-absolute;
+          }
+        }
+
+        &.m-0 i {
+          margin: 0 !important;
+        }
+
+        &.i-center i {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
