@@ -8,6 +8,7 @@ import { logout } from "../reducers/authReducer";
 import { getMe } from "../actions/auth";
 import ListHotelAdmin from "../pages/ListHotelAdmin/ListHotelAdmin";
 import ProtectedRoute from "./ProtectedRoute";
+import Crear from "../pages/Crear";
 
 export default function AppRouter() {
   const dispatch = useDispatch();
@@ -33,6 +34,10 @@ export default function AppRouter() {
           <Route
             path="/list-admin"
             element={<ProtectedRoute element={<ListHotelAdmin />} />}
+          />
+          <Route
+            path="/crear"
+            element={<ProtectedRoute element={<Crear />} />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
