@@ -8,8 +8,8 @@ export function initialValues(hotel) {
     file: null,
     address: hotel?.address || "",
     nit: hotel?.nit || "",
-    room: hotel?.room || undefined,
-    image: hotel?.hotel || "",
+    room: hotel?.room || "",
+    image: hotel?.image || "",
   };
 }
 

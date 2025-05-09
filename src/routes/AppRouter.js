@@ -36,6 +36,10 @@ export default function AppRouter() {
             element={<ProtectedRoute element={<ListHotelAdmin />} />}
           />
           <Route
+            path="/hotel/editar/:idHotel"
+            element={<ProtectedRoute element={<Crear />} />}
+          />
+          <Route
             path="/crear"
             element={<ProtectedRoute element={<Crear />} />}
           />

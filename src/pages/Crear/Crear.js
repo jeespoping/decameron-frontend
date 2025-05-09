@@ -1,36 +1,42 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./Crear.scss";
-import { Button, Form, Image } from "semantic-ui-react";
+import { Button, Form, Image, Loader } from "semantic-ui-react";
 import { useDropzone } from "react-dropzone";
 import { useFormik } from "formik";
 import { initialValues, validationSchema } from "./CrearForm.form";
-import { useNavigate } from "react-router";
-import { getHotels, createHotel } from "../../api/hotel";
+import { useNavigate, useParams } from "react-router";
+import { getHotels, createHotel, getHotel, updateHotel } from "../../api/hotel";
 
-export default function Crear({ hotel }) {
+export default function Crear() {
   const [loading, setLoading] = useState(false);
+  const [loadingPage, setLoadingPage] = useState(true);
+  const [hotel, setHotel] = useState(null);
+
+  const { idHotel } = useParams();
+
+  const isEditing = !!idHotel;
 
   const [hotels, setHotels] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const response = await getHotels({ page: 1 });
-      setHotels(response?.data?.data);
-    })();
-  }, []);
 
   const navigate = useNavigate();
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: initialValues(hotel),
     validationSchema: validationSchema(hotels, hotel),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       setLoading(true);
-      const response = await createHotel(formValue);
+      try {
+        if (!hotel) {
+          const response = await createHotel(formValue);
+        } else {
+          const response = await updateHotel(formValue, hotel.id);
+        }
 
-      if (response) {
         navigate("/list-admin");
+      } catch (error) {
+        console.error(error);
       }
 
       setLoading(false);
@@ -58,9 +64,29 @@ export default function Crear({ hotel }) {
     return null;
   };
 
+  useEffect(() => {
+    (async () => {
+      setLoadingPage(true);
+      const response = await getHotels({ page: 1 });
+      setHotels(response?.data?.data);
+
+      if (idHotel) {
+        const response = await getHotel(idHotel);
+        setHotel(response?.data);
+      } else {
+        setHotel(null);
+      }
+      setLoadingPage(false);
+    })();
+  }, [idHotel]);
+
+  if (loadingPage) {
+    <Loader active>Cargando</Loader>;
+  }
+
   return (
     <div className="crear">
-      <h1 className="crear__title">Crear hotel</h1>
+      <h1 className="crear__title">{hotel ? "Editar Hotel" : "Crear Hotel"}</h1>
       <Form className="hotel-form" onSubmit={formik.handleSubmit}>
         <div className="hotel-form__image" {...getRootProps()}>
           <input data-cy="input-image" {...getInputProps()} />
