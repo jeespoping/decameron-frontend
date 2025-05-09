@@ -1,0 +1,38 @@
+@import "../../../SCSS/index.scss";
+
+.list-rooms {
+  padding: 10px;
+
+  .content {
+    margin: 15px;
+
+    .title {
+      width: max-content;
+      background-color: $background-dark-absolute;
+      color: $font-light;
+      padding: 5px 10px;
+      border-radius: 5px 5px 0 0;
+    }
+    .data {
+      background-color: $background-grey;
+      margin: 0, 5px;
+      box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+      padding: 15px;
+    }
+  }
+
+  &__room {
+    td {
+      text-align: center !important;
+
+      &:first-of-type {
+        display: flex !important;
+        align-items: center;
+      }
+    }
+
+    .titulo {
+      font-weight: bold;
+    }
+  }
+}

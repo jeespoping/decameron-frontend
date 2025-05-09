@@ -91,3 +91,14 @@ export const addRoom = async (formValue) => {
     return null;
   }
 };
+
+export const getRooms = async (hotelId) => {
+  try {
+    const { data } = await httpConToken(`/hotel/room/${hotelId}`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
