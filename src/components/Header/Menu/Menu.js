@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Grid,
-  Icon,
-  Label,
-  Menu as Menuweb,
-} from "semantic-ui-react";
+import { Container, Grid, Icon, Menu as Menuweb } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import "./Menu.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../reducers/authReducer";
 import ModalBasic from "../../ModalBasic";
 import Auth from "../../Auth/Auth";
-import { size } from "lodash";
 
 export default function Menu() {
   const { user } = useSelector((state) => state.auth);

@@ -14,8 +14,6 @@ export default function Crear() {
 
   const { idHotel } = useParams();
 
-  const isEditing = !!idHotel;
-
   const [hotels, setHotels] = useState(false);
 
   const navigate = useNavigate();
@@ -29,9 +27,9 @@ export default function Crear() {
       setLoading(true);
       try {
         if (!hotel) {
-          const response = await createHotel(formValue);
+          await createHotel(formValue);
         } else {
-          const response = await updateHotel(formValue, hotel.id);
+          await updateHotel(formValue, hotel.id);
         }
 
         navigate("/list-admin");

@@ -1,5 +1,4 @@
-import { Container, Loader } from "semantic-ui-react";
-
+import { Loader } from "semantic-ui-react";
 import { getHotels } from "../../api/hotel";
 import { useEffect, useState } from "react";
 import "./Inicio.scss";
