@@ -102,3 +102,14 @@ export const getRooms = async (hotelId) => {
     return null;
   }
 };
+
+export const deleteRoom = async (roomId) => {
+  try {
+    const { data } = await httpConToken.delete(`/habitacion/${roomId}`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

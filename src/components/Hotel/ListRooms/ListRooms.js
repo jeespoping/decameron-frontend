@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { getRooms } from "../../../api/hotel";
+import React, { useState } from "react";
+import { deleteRoom } from "../../../api/hotel";
 import { Icon, Table } from "semantic-ui-react";
 import "./ListRooms.scss";
 import { map } from "lodash";
 
-export function ListRooms({ hotel }) {
-  const [rooms, setRooms] = useState(null);
+export function ListRooms({ hotel, rooms, onReloadDetalle }) {
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const response = await getRooms(hotel.id);
-      setRooms(response);
-    })();
-  }, []);
+  const removeRoom = async (room) => {
+    setLoading(true);
+    const response = await deleteRoom(room);
 
-  const removeRoom = (room) => {
-    console.log(room);
+    if (response?.res) {
+      onReloadDetalle();
+    }
+    setLoading(false);
   };
 
   return (
@@ -67,6 +66,7 @@ export function ListRooms({ hotel }) {
                   <Table.Cell>
                     {room.accommodation}
                     <Icon
+                      loading={loading}
                       name="close"
                       link
                       onClick={() => removeRoom(room.id)}

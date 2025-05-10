@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 import ModalBasic from "../../ModalBasic/ModalBasic";
 import { AddRoomForm } from "../AddRoomForm";
-import { ListRooms } from "../ListRooms";
 
 export function HotelItem({ hotel, onReload }) {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -43,7 +42,6 @@ export function HotelItem({ hotel, onReload }) {
         setContentModal(
           <>
             <AddRoomForm hotel={hotel} setShowModal={setShowModal} />
-            <ListRooms hotel={hotel} />
           </>
         );
         setShowModal(true);
