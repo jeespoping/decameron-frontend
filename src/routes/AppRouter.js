@@ -9,6 +9,7 @@ import { getMe } from "../actions/auth";
 import ListHotelAdmin from "../pages/ListHotelAdmin/ListHotelAdmin";
 import ProtectedRoute from "./ProtectedRoute";
 import Crear from "../pages/Crear";
+import Hotel from "../pages/Hotel";
 
 export default function AppRouter() {
   const dispatch = useDispatch();
@@ -31,6 +32,10 @@ export default function AppRouter() {
       <div>
         <Routes>
           <Route path="/" element={<PublicRoute element={<Inicio />} />} />;
+          <Route
+            path="/hotel/:idHotel"
+            element={<PublicRoute element={<Hotel />} />}
+          />
           <Route
             path="/list-admin"
             element={<ProtectedRoute element={<ListHotelAdmin />} />}
